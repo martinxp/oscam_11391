@@ -1099,7 +1099,7 @@ static int32_t irdeto_do_emm(struct s_reader *reader, EMM_PACKET *ep)
 				}
 				else
 				{
-					if(ep->type == GLOBAL && ((reader->caid == 0x0624 && csystem_data->acs57 == 1) || reader->caid == 0x0653 || reader->caid == 0x0650 || reader->caid == 0x0666))
+					if(ep->type == GLOBAL && ((reader->caid == 0x0624 && csystem_data->acs57 == 1) || reader->caid == 0x0648 || reader->caid == 0x0650 || reader->caid == 0x0653))
 					{
 						memcpy(&cta_cmd[9], &ep->emm[6], 1);
 						memcpy(&cta_cmd[10], &ep->emm[7], dataLen - 6);

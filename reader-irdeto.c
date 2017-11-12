@@ -513,7 +513,7 @@ static int32_t irdeto_card_init(struct s_reader *reader, ATR *newatr)
 		}
 	}
 
-	if((reader->caid == 0x0653) || (reader->caid == 0x0650) || (reader->caid == 0x0666) || (reader->caid == 0x0624 && csystem_data->acs57 == 1))    // acs 6.08 and ice 0D96/0624
+	if((reader->caid == 0x0648) || (reader->caid == 0x0650) || (reader->caid == 0x0653) || (reader->caid == 0x0624 && csystem_data->acs57 == 1))    // acs 6.08 and ice 0D96/0624
 	{
 		camkey = 4;
 		sc_Acs57CamKey[2] = 0;
@@ -546,7 +546,7 @@ static int32_t irdeto_card_init(struct s_reader *reader, ATR *newatr)
 		for(i = 5; i < (int)sizeof(sc_Acs57CamKey) - 1; i++)
 			{ crc ^= sc_Acs57CamKey[i]; }
 		sc_Acs57CamKey[69] = crc;
-		if((reader->caid == 0x0653) || (reader->caid == 0x0650) || (reader->caid == 0x0666) || (reader->caid == 0x0624 && csystem_data->acs57 == 1))
+		if((reader->caid == 0x0648) || (reader->caid == 0x0650) || (reader->caid == 0x0653) || (reader->caid == 0x0624 && csystem_data->acs57 == 1))
 		{
 			sc_Acs57CamKey[69] = XorSum(sc_Acs57CamKey, 69) ^ 0x3f ^(sc_Acs57CamKey[0] & 0xf0) ^ 0x1b;
 			if(irdeto_do_cmd(reader, sc_Acs57CamKey, 0x9011, cta_res, &cta_lr))
@@ -613,7 +613,7 @@ int32_t irdeto_do_ecm(struct s_reader *reader, const ECM_REQUEST *er, struct s_e
 	{
 		int32_t crc = 63;
 		sc_Acs57Ecm[4] = er->ecm[2] - 2;
-		if((reader->caid == 0x0653) || (reader->caid == 0x0650) || (reader->caid == 0x0666) || (reader->caid == 0x0624 && csystem_data->acs57 == 1))    //crc for orf, cslink, skylink
+		if((reader->caid == 0x0648) || (reader->caid == 0x0650) || (reader->caid == 0x0653) || (reader->caid == 0x0624 && csystem_data->acs57 == 1))    //crc for orf, cslink, skylink
 		{
 			sc_Acs57Ecm[2] = 0;
 			crc ^= 0x01;
@@ -1082,7 +1082,7 @@ static int32_t irdeto_do_emm(struct s_reader *reader, EMM_PACKET *ep)
 					rdr_log_dbg(reader, D_EMM, "dataLen %d seems wrong, faulty EMM?", dataLen);
 					return ERROR;
 				}
-				if(ep->type == GLOBAL && ((reader->caid == 0x0624 && csystem_data->acs57 == 1) || reader->caid == 0x0653 || reader->caid == 0x0650 || reader->caid == 0x0666)) { dataLen += 2; }
+				if(ep->type == GLOBAL && ((reader->caid == 0x0624 && csystem_data->acs57 == 1) || reader->caid == 0x0648 || reader->caid == 0x0650 || reader->caid == 0x0653)) { dataLen += 2; }
 				int32_t crc = 63;
 				sc_Acs57Emm[4] = dataLen;
 				memcpy(&cta_cmd, sc_Acs57Emm, sizeof(sc_Acs57Emm));

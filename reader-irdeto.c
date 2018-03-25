@@ -411,7 +411,7 @@ static int32_t irdeto_card_init(struct s_reader *reader, ATR *newatr)
 	{
 		if(csystem_data->acs57 == 1)
 		{
-			rdr_log(reader, "INFO: Card use internal CamKeyData for skylink and freesat");
+			rdr_log(reader, "INFO: Card use internal CamKeyData ..");
 			memcpy(&sc_Acs57CamKey[5], CamKeyData, 0x40);
     			memcpy(reader->boxkey, Camkey, 8);
 		}
